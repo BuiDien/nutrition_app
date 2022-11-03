@@ -3,8 +3,11 @@ package com.example.nutrition_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,38 +23,20 @@ import com.google.gson.stream.JsonReader;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    Button button_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        JSONArray test = new JSONArray();
-        try {
-            test = loadJSONArray(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.d("Main","Jump here2");
+        button_back = findViewById(R.id.go_nutrition);
+        button_back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            }
+        });
+
     }
-    private static JSONArray loadJSONArray(Context context)throws JsonIOException, JsonSyntaxException,
-            JsonParseException, IOException{
-        StringBuilder builder = new StringBuilder();
-        InputStream in = context.getResources().openRawResource(R.raw.datatemp);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        String line;
-        try{
-            do {
-                line = reader.readLine();
-                builder.append(line);
-            }while (line != null);
-            JSONObject json = new JSONObject(builder.toString());
-            Log.d("Main","Jump here 1");
-            return json.getJSONArray("data");
-        }catch (Exception exception){
-            Log.d("Main","Jump here 3");
-            exception.printStackTrace();
-        }
-        return null;
-    }
+
 }
