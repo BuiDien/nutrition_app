@@ -16,7 +16,7 @@ public class nutrition {
     private double  weight;  // Unit KG
     private double  height;  // Uint Cm
     private int age;
-    private int type;
+    private int type; // type activity
     public nutrition(double height_input, double weight_input,int sex_input,int age_input,int type_input){
         weight = weight_input;
         height = height_input;

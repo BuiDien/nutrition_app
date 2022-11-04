@@ -23,17 +23,25 @@ import com.google.gson.stream.JsonReader;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button button_back;
+    Button button_nutrition;
+    Button button_config;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button_back = findViewById(R.id.go_nutrition);
-        button_back.setOnClickListener(new View.OnClickListener(){
+        button_nutrition = findViewById(R.id.go_nutrition);
+        button_nutrition.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            }
+        });
+        button_config = findViewById(R.id.go_config);
+        button_config.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, ConfigScreen.class));
             }
         });
 
