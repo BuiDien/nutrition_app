@@ -10,4 +10,23 @@
     <string name="height_unit">Height Unit</string>
     <string name="age">Age</string>
     <string name="sex">Sex</string>
+    <string-array name="sex_kind">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="activity_kind">
+        <item>Sedentary</item>
+        <item>Lightly Active</item>
+        <item>Moderately Active</item>
+        <item>Very Active</item>
+        <item>Extra Active</item>
+    </string-array>
+    <string-array name="height_unit">
+        <item>Centimeter</item>
+        <item>Feet</item>
+    </string-array>
+    <string-array name="Weight_unit">
+        <item>Kilogam</item>
+        <item>Pound</item>
+    </string-array>
 </resources>
