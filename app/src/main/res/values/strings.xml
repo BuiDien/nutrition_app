@@ -10,6 +10,10 @@
     <string name="height_unit">Height Unit</string>
     <string name="age">Age</string>
     <string name="sex">Sex</string>
+    <string name="save">Save</string>
+    <string name="input_height">Input Height</string>
+    <string name="input_weight">Input Weight</string>
+    <string name="input_age">Input Age</string>
     <string-array name="sex_kind">
         <item>Male</item>
         <item>Female</item>

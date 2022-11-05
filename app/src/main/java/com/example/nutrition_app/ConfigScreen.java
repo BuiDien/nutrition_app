@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +23,14 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
     Integer weight_unit;
     Integer height_unit;
     Integer sex_kind;
+    EditText height_text;
+    EditText weight_text;
+    EditText age_text;
+    Button button_save;
+    Double weight;
+    Double height;
+    Integer age;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +60,25 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
         adapter_sex.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_height.setAdapter(adapter_height);
         spinner_height.setOnItemSelectedListener(this);
+
+        height_text = (EditText) findViewById(R.id.height_text);
+        weight_text = (EditText) findViewById(R.id.weight_text);
+        age_text = (EditText) findViewById(R.id.age_text);
+
+
+
+        button_save = findViewById(R.id.button_save);
+        button_save.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d("test", "onCreate: " + age_text.getText());
+                Log.d("test", "onCreate: " + weight_text.getText());
+                Log.d("test", "onCreate: " + height_text.getText());
+                weight = Double.parseDouble(String.valueOf(weight_text.getText()));
+                height = Double.parseDouble(String.valueOf(height_text.getText()));
+                age = Integer.parseInt(String.valueOf(age_text.getText()));
+            }
+        });
 
     }
     @Override

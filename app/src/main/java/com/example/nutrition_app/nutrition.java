@@ -55,6 +55,44 @@ public class nutrition {
         }
         TDEE = TEF + BMR + TEA;
     }
+
+    public double getTDEE() {
+        return TDEE;
+    }
+    public void setTDEE(double TDEE) {
+        this.TDEE = TDEE;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    public double getHeight() {
+        return height;
+    }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+    public double getWeight() {
+        return weight;
+    }
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+    public int getSex() {
+        return sex;
+    }
+    public int getType() {
+        return type;
+    }
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public double Max_Cal(int kind){
         double max_cal = 0.0;
         switch (kind){
@@ -72,6 +110,5 @@ public class nutrition {
                 break;
         }
         return max_cal;
-
     }
 }

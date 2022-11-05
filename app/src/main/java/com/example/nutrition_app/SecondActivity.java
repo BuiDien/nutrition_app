@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +20,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import java.nio.channels.FileChannel;
+import java.util.Objects;
+
 public class SecondActivity extends AppCompatActivity {
     Button search_button;
     EditText search_text;
+    private static final String TAG = "Second";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +50,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+
+        String data = null;
+
+        data = readFile(this);
+        Log.d(TAG,data);
 
 
         JSONArray test = new JSONArray();
@@ -69,5 +82,38 @@ public class SecondActivity extends AppCompatActivity {
             exception.printStackTrace();
         }
         return null;
+    }
+    private String readFile(Context context)
+    {
+        String myData = "";
+        try {
+            FileInputStream fis = new FileInputStream("/data/data/com.example.nutrition_app/files/jsonfile.json");
+            DataInputStream in = new DataInputStream(fis);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                myData = myData + strLine + "\n";
+            }
+            br.close();
+            in.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return myData;
+    }
+    private String readTextFromUri(Uri uri) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (InputStream inputStream =
+                     getContentResolver().openInputStream(uri);
+             BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        }
+        return stringBuilder.toString();
     }
 }

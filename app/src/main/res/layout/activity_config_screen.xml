@@ -10,10 +10,11 @@
         android:id="@+id/hunitspinner"
         android:layout_width="200dp"
         android:layout_height="48dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/typetext3"
         app:layout_constraintTop_toBottomOf="@+id/wunitspinner"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -39,7 +40,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toEndOf="@+id/typetext2"
         app:layout_constraintTop_toBottomOf="@+id/typespinner"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -62,7 +63,7 @@
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.16"
@@ -75,16 +76,17 @@
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="@string/input_age"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toEndOf="@+id/age"
         app:layout_constraintTop_toBottomOf="@+id/sexspinner"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
     <TextView
         android:id="@+id/typetext"
@@ -134,7 +136,9 @@
         android:layout_marginEnd="20dp"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="@string/input_height"
+        android:inputType="number|numberDecimal"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toEndOf="@+id/heighttextview"
@@ -146,13 +150,15 @@
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="@string/input_weight"
+        android:inputType="number|numberDecimal"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toEndOf="@+id/weighttextview"
         app:layout_constraintTop_toBottomOf="@+id/height_text"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -195,5 +201,16 @@
         app:layout_constraintStart_toEndOf="@+id/sextext"
         app:layout_constraintTop_toBottomOf="@+id/weight_text"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
