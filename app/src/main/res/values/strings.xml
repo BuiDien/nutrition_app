@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">nutrition_app</string>
+    <string name="app_name">Nutrition</string>
     <string name="nutrition">Nutrition</string>
     <string name="search">Search</string>
     <string name="height">Height</string>
@@ -14,6 +14,7 @@
     <string name="input_height">Input Height</string>
     <string name="input_weight">Input Weight</string>
     <string name="input_age">Input Age</string>
+    <string name="refresh">Refresh</string>
     <string-array name="sex_kind">
         <item>Male</item>
         <item>Female</item>

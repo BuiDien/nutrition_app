@@ -99,13 +99,14 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
                     datasave.put("weight_unit", Integer.toString(weight_unit));
                     datasave.put("height_unit", Integer.toString(height_unit));
                     Log.d("JSON" , datasave.toString());
-                    FileOutputStream fos = new FileOutputStream("/data/data/com.example.nutrition_app/files/database.json");
+                    FileOutputStream fos = v.getContext().openFileOutput("database.json", Context.MODE_PRIVATE);
                     String jsonString = datasave.toString();
                     fos.write(jsonString.getBytes());
                     fos.close();
 
                     Log.d("JSON" , datasave.toString());
-
+                    String text = "Save";
+                    Toast.makeText(v.getContext(),text,Toast.LENGTH_SHORT).show();
 
                 } catch (IOException |JSONException e) {
                     e.printStackTrace();
@@ -117,7 +118,6 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(adapterView.getContext(),text,Toast.LENGTH_SHORT).show();
         switch(text) {
             case "Male":
                 sex_kind = 0;

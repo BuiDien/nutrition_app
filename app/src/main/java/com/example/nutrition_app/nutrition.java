@@ -99,6 +99,24 @@ public class nutrition {
     public void setType(int type) {
         this.type = type;
     }
+    public double getBMR() {
+        return BMR;
+    }
+    public void setBMR(double BMR) {
+        this.BMR = BMR;
+    }
+    public double getTEF() {
+        return TEF;
+    }
+    public void setTEF(double TEF) {
+        this.TEF = TEF;
+    }
+    public double getTEA() {
+        return TEA;
+    }
+    public void setTEA(double TEA) {
+        this.TEA = TEA;
+    }
 
     public double Max_Cal(int kind){
         double max_cal = 0.0;

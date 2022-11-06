@@ -51,19 +51,6 @@ public class SecondActivity extends AppCompatActivity {
                 Log.d("test", "onCreate: " + search_text.getText());
             }
         });
-        String data = null;
-
-        data = nutrition.readFile(this);
-        Log.d(TAG,data);
-        try {
-            JSONObject test122 = new JSONObject(data);
-            Object temp =  test122.get("component1");
-            Log.d("JSON" , temp.toString());
-            test122.put("component1", "url11112211212");
-            Log.d("JSON" , test122.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         JSONArray test = new JSONArray();
         try {
             test = loadJSONArray(this);
@@ -89,5 +76,4 @@ public class SecondActivity extends AppCompatActivity {
         }
         return null;
     }
-
 }
