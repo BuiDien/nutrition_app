@@ -2,6 +2,7 @@ package com.example.nutrition_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,16 +14,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ConfigScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String TAG = "config";
     Spinner spinner_sex;
     Spinner spinner_activity;
     Spinner spinner_weight;
     Spinner spinner_height;
-    Integer activity_kind;
-    Integer weight_unit;
-    Integer height_unit;
-    Integer sex_kind;
     EditText height_text;
     EditText weight_text;
     EditText age_text;
@@ -30,6 +34,11 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
     Double weight;
     Double height;
     Integer age;
+    Integer activity_kind;
+    Integer weight_unit;
+    Integer height_unit;
+    Integer sex_kind;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +77,9 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
 
 
         button_save = findViewById(R.id.button_save);
+        String data = null;
+        data = nutrition.readFile(this);
+        String finalData = data;
         button_save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -77,6 +89,27 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
                 weight = Double.parseDouble(String.valueOf(weight_text.getText()));
                 height = Double.parseDouble(String.valueOf(height_text.getText()));
                 age = Integer.parseInt(String.valueOf(age_text.getText()));
+                Log.d(TAG, finalData);
+                try {
+                    JSONObject datasave = new JSONObject(finalData);
+                    datasave.put("weight", Double.toString(weight));
+                    datasave.put("height", Double.toString(height));
+                    datasave.put("age", Integer.toString(age));
+                    datasave.put("activity", Integer.toString(activity_kind));
+                    datasave.put("weight_unit", Integer.toString(weight_unit));
+                    datasave.put("height_unit", Integer.toString(height_unit));
+                    Log.d("JSON" , datasave.toString());
+                    FileOutputStream fos = new FileOutputStream("/data/data/com.example.nutrition_app/files/database.json");
+                    String jsonString = datasave.toString();
+                    fos.write(jsonString.getBytes());
+                    fos.close();
+
+                    Log.d("JSON" , datasave.toString());
+
+
+                } catch (IOException |JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

@@ -14,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,44 +48,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Creating first Object
         JSONObject json = new JSONObject();
-        JSONObject config1 = new JSONObject();
         try {
             json.put("component1", "url");
-            json.put("component2", "url");
-        }
-        catch (JSONException e) {
-// TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-//Creating second object
-        JSONObject config2 = new JSONObject();
-        try {
-            json.put("component1", "url");
-            json.put("component2", "url");
-        }
-        catch (JSONException e) {
-// TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        JSONObject finalJSON = new JSONObject();
-        try {
-            //Adding both objects in one single object
-            json.put("config1", config1);
-            json.put("config2", config2);
-
+//            json.put("component2", "url");
+            FileOutputStream fos = this.openFileOutput("database.json", Context.MODE_PRIVATE);
             String jsonString = json.toString();
-
-            FileOutputStream fos = this.openFileOutput("jsonfile.json", Context.MODE_PRIVATE);
             fos.write(jsonString.getBytes());
             fos.close();
 
             Log.d("JSON" , json.toString());
-
-        } catch (IOException | JSONException e) {
+        }
+        catch (IOException |JSONException e) {
             e.printStackTrace();
         }
     }

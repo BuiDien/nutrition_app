@@ -1,6 +1,13 @@
 package com.example.nutrition_app;
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 public class nutrition {
@@ -110,5 +117,25 @@ public class nutrition {
                 break;
         }
         return max_cal;
+    }
+    public static String readFile(Context context)
+    {
+        String myData = "";
+        try {
+            FileInputStream fis = new FileInputStream("/data/data/com.example.nutrition_app/files/database.json");
+            DataInputStream in = new DataInputStream(fis);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                myData = myData + strLine + "\n";
+            }
+            br.close();
+            in.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return myData;
     }
 }

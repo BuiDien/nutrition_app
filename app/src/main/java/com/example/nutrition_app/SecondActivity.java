@@ -17,6 +17,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -29,6 +30,7 @@ import java.io.InputStreamReader;
 
 import java.nio.channels.FileChannel;
 import java.util.Objects;
+import com.example.nutrition_app.nutrition;
 
 public class SecondActivity extends AppCompatActivity {
     Button search_button;
@@ -49,14 +51,19 @@ public class SecondActivity extends AppCompatActivity {
                 Log.d("test", "onCreate: " + search_text.getText());
             }
         });
-
-
         String data = null;
 
-        data = readFile(this);
+        data = nutrition.readFile(this);
         Log.d(TAG,data);
-
-
+        try {
+            JSONObject test122 = new JSONObject(data);
+            Object temp =  test122.get("component1");
+            Log.d("JSON" , temp.toString());
+            test122.put("component1", "url11112211212");
+            Log.d("JSON" , test122.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         JSONArray test = new JSONArray();
         try {
             test = loadJSONArray(this);
@@ -64,7 +71,6 @@ public class SecondActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     private static JSONArray loadJSONArray(Context context)throws JsonIOException, JsonSyntaxException,
             JsonParseException, IOException {
         StringBuilder builder = new StringBuilder();
@@ -83,37 +89,5 @@ public class SecondActivity extends AppCompatActivity {
         }
         return null;
     }
-    private String readFile(Context context)
-    {
-        String myData = "";
-        try {
-            FileInputStream fis = new FileInputStream("/data/data/com.example.nutrition_app/files/jsonfile.json");
-            DataInputStream in = new DataInputStream(fis);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-            String strLine;
-            while ((strLine = br.readLine()) != null) {
-                myData = myData + strLine + "\n";
-            }
-            br.close();
-            in.close();
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return myData;
-    }
-    private String readTextFromUri(Uri uri) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (InputStream inputStream =
-                     getContentResolver().openInputStream(uri);
-             BufferedReader reader = new BufferedReader(
-                     new InputStreamReader(Objects.requireNonNull(inputStream)))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        }
-        return stringBuilder.toString();
-    }
 }
