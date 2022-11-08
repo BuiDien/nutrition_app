@@ -7,34 +7,67 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/BMR_Value"
+        android:layout_width="200dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toEndOf="@+id/BMR_txt"
+        app:layout_constraintTop_toBottomOf="@+id/TEF_Value" />
+
+    <TextView
+        android:id="@+id/TEF_Value"
+        android:layout_width="200dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/TEF_txt"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TDEE_Value"
+        android:layout_width="200dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toEndOf="@+id/TDEE_txt"
+        app:layout_constraintTop_toBottomOf="@+id/TEA_Value" />
+
+    <TextView
         android:id="@+id/TEF_txt"
         android:layout_width="49dp"
         android:layout_height="27dp"
-        android:text="TEF"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tef"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/BMR_txt"
         android:layout_width="49dp"
         android:layout_height="27dp"
-        android:text="BMR"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/bmr"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="90dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TEF_txt" />
 
     <TextView
         android:id="@+id/TEA_txt"
         android:layout_width="49dp"
         android:layout_height="27dp"
-        android:text="TEA"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/tea"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BMR_txt" />
 
     <Button
-        android:id="@+id/go_nutrition"
+        android:id="@+id/go_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
@@ -47,9 +80,63 @@
         android:id="@+id/TDEE_txt"
         android:layout_width="49dp"
         android:layout_height="27dp"
-        android:text="TDEE"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/tdee"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="229dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TEA_txt" />
+
+    <TextView
+        android:id="@+id/Style"
+        android:layout_width="49dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/style"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TDEE_txt" />
+
+    <TextView
+        android:id="@+id/TEA_Value"
+        android:layout_width="200dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toEndOf="@+id/TEA_txt"
+        app:layout_constraintTop_toBottomOf="@+id/BMR_Value" />
+
+    <Spinner
+        android:id="@+id/Style_select"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/Style"
+        app:layout_constraintTop_toBottomOf="@+id/TDEE_Value"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/max_cal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="312dp"
+        android:text="@string/maximum_calories_for_a_day"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cal_value"
+        android:layout_width="197dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/max_cal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

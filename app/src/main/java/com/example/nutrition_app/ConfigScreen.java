@@ -38,7 +38,7 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
     Integer weight_unit;
     Integer height_unit;
     Integer sex_kind;
-
+    String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +54,19 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
 
         spinner_activity = findViewById(R.id.typespinner);
         ArrayAdapter<CharSequence> adapter_activity = ArrayAdapter.createFromResource(this,R.array.activity_kind, android.R.layout.simple_spinner_item);
-        adapter_sex.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter_activity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_activity.setAdapter(adapter_activity);
         spinner_activity.setOnItemSelectedListener(this);
 
         spinner_weight = findViewById(R.id.wunitspinner);
         ArrayAdapter<CharSequence> adapter_weight = ArrayAdapter.createFromResource(this,R.array.Weight_unit, android.R.layout.simple_spinner_item);
-        adapter_sex.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter_weight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_weight.setAdapter(adapter_weight);
         spinner_weight.setOnItemSelectedListener(this);
 
         spinner_height = findViewById(R.id.hunitspinner);
         ArrayAdapter<CharSequence> adapter_height = ArrayAdapter.createFromResource(this,R.array.height_unit, android.R.layout.simple_spinner_item);
-        adapter_sex.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter_height.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_height.setAdapter(adapter_height);
         spinner_height.setOnItemSelectedListener(this);
 
@@ -77,7 +77,7 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
 
 
         button_save = findViewById(R.id.button_save);
-        String data = null;
+
         data = nutrition.readFile(this);
         String finalData = data;
         button_save.setOnClickListener(new View.OnClickListener(){
@@ -91,11 +91,19 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
                 age = Integer.parseInt(String.valueOf(age_text.getText()));
                 Log.d(TAG, finalData);
                 try {
-                    JSONObject datasave = new JSONObject(finalData);
+                    JSONObject datasave;
+                    if(finalData ==""){
+                        datasave = new JSONObject();
+                    }
+                    else{
+                        datasave = new JSONObject(finalData);
+                    }
+
                     datasave.put("weight", Double.toString(weight));
                     datasave.put("height", Double.toString(height));
                     datasave.put("age", Integer.toString(age));
                     datasave.put("activity", Integer.toString(activity_kind));
+                    datasave.put("sex", Integer.toString(sex_kind));
                     datasave.put("weight_unit", Integer.toString(weight_unit));
                     datasave.put("height_unit", Integer.toString(height_unit));
                     Log.d("JSON" , datasave.toString());
@@ -105,8 +113,7 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
                     fos.close();
 
                     Log.d("JSON" , datasave.toString());
-                    String text = "Save";
-                    Toast.makeText(v.getContext(),text,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),"Save",Toast.LENGTH_SHORT).show();
 
                 } catch (IOException |JSONException e) {
                     e.printStackTrace();
@@ -120,11 +127,11 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
         String text = adapterView.getItemAtPosition(i).toString();
         switch(text) {
             case "Male":
-                sex_kind = 0;
+                sex_kind = 1;
                 Log.d(TAG,"Male");
                 break;
             case "Female":
-                sex_kind = 1;
+                sex_kind = 2;
                 Log.d(TAG,"Female");
                 break;
             case "Sedentary":

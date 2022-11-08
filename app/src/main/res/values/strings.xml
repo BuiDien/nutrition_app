@@ -15,6 +15,12 @@
     <string name="input_weight">Input Weight</string>
     <string name="input_age">Input Age</string>
     <string name="refresh">Refresh</string>
+    <string name="tef">TEF :</string>
+    <string name="bmr">BMR :</string>
+    <string name="tea">TEA</string>
+    <string name="tdee">TDEE :</string>
+    <string name="style">Style</string>
+    <string name="maximum_calories_for_a_day">Maximum Calories for a Day</string>
     <string-array name="sex_kind">
         <item>Male</item>
         <item>Female</item>
@@ -33,5 +39,10 @@
     <string-array name="Weight_unit">
         <item>Kilogam</item>
         <item>Pound</item>
+    </string-array>
+    <string-array name="Style">
+        <item>Normal</item>
+        <item>Lose Weight</item>
+        <item>Bulking</item>
     </string-array>
 </resources>
