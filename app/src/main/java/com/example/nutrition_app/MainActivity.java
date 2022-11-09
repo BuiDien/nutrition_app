@@ -22,6 +22,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button button_refesh;
     TextView TEF_value;
     TextView BMR_value;
+    private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.#");
     TextView TEA_value;
     TextView TDEE_value;
     Double weight;
@@ -48,32 +50,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getSupportActionBar();
-        BMR_value = findViewById(R.id.BMR_Value);
-        TEF_value = findViewById(R.id.TEF_Value);
-        TEA_value = findViewById(R.id.TEA_Value);
-        TDEE_value = findViewById(R.id.TDEE_Value);
-        MaxCal = findViewById(R.id.cal_value);
-        parsedatabase(this);
-        button_refesh = findViewById(R.id.go_refresh);
-        button_refesh.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                parsedatabase(v.getContext());
-                BMR_value.setText(String.valueOf(data.getBMR()));
-                TEF_value.setText(String.valueOf(data.getTEF()));
-                TEA_value.setText(String.valueOf(data.getTEA()));
-                TDEE_value.setText(String.valueOf(data.getTDEE()));
-                MaxCal.setText(String.valueOf(data.Max_Cal(style)));
-                v.invalidate();
-            }
-        });
         style = 1;
         style_spinner = findViewById(R.id.Style_select);
         ArrayAdapter<CharSequence> adapter_style = ArrayAdapter.createFromResource(this,R.array.Style, android.R.layout.simple_spinner_item);
         adapter_style.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         style_spinner.setAdapter(adapter_style);
         style_spinner.setOnItemSelectedListener(this);
+
+        BMR_value = findViewById(R.id.BMR_Value);
+        TEF_value = findViewById(R.id.TEF_Value);
+        TEA_value = findViewById(R.id.TEA_Value);
+        TDEE_value = findViewById(R.id.TDEE_Value);
+        MaxCal = findViewById(R.id.cal_value);
+        parsedatabase(this);
         data = new nutrition(height,weight,sex_kind,age,activity_kind);
+        BMR_value.setText(String.valueOf(REAL_FORMATTER.format(data.getBMR())));
+        TEF_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEF())));
+        TEA_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEA())));
+        TDEE_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTDEE())));
+        MaxCal.setText(String.valueOf(REAL_FORMATTER.format(data.Max_Cal(style))));
+        button_refesh = findViewById(R.id.go_refresh);
+
+
+        button_refesh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                parsedatabase(v.getContext());
+                BMR_value.setText(String.valueOf(REAL_FORMATTER.format(data.getBMR())));
+                TEF_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEF())));
+                TEA_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEA())));
+                TDEE_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTDEE())));
+                MaxCal.setText(String.valueOf(REAL_FORMATTER.format(data.Max_Cal(style))));
+                v.invalidate();
+            }
+        });
+
 // Todo: add checking data input
 //       checking sytle and change size of tef bmr tea and tdee
 //       add feature searching database nutrion *
@@ -176,11 +187,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Log.d(TAG,"Normal");
                 break;
             case "Lose Weight":
-                style = 2;
+                style = 3;
                 Log.d(TAG,"Lose Weight");
                 break;
             case "Bulking":
-                style = 3;
+                style = 2;
                 Log.d(TAG,"Bulking");
                 break;
 

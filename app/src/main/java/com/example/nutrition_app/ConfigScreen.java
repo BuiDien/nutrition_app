@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -31,6 +32,7 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
     EditText weight_text;
     EditText age_text;
     Button button_save;
+    Button button_clear;
     Double weight;
     Double height;
     Integer age;
@@ -77,6 +79,24 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
 
 
         button_save = findViewById(R.id.button_save);
+        button_clear = findViewById(R.id.button_clear);
+        button_clear.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    FileOutputStream fos = v.getContext().openFileOutput("database.json", Context.MODE_PRIVATE);
+                    String jsonString = "{}";
+                    fos.write(jsonString.getBytes());
+                    jsonString = nutrition.readFile(v.getContext());
+                    Log.d(TAG,jsonString);
+                    fos.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
 
         data = nutrition.readFile(this);
         String finalData = data;
@@ -116,6 +136,7 @@ public class ConfigScreen extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(v.getContext(),"Save",Toast.LENGTH_SHORT).show();
 
                 } catch (IOException |JSONException e) {
+                    Toast.makeText(v.getContext(),"Something missing please check again",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }

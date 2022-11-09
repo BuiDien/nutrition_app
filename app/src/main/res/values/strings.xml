@@ -21,6 +21,7 @@
     <string name="tdee">TDEE :</string>
     <string name="style">Style</string>
     <string name="maximum_calories_for_a_day">Maximum Calories for a Day</string>
+    <string name="clear_data">Clear Data</string>
     <string-array name="sex_kind">
         <item>Male</item>
         <item>Female</item>
