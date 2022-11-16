@@ -62,25 +62,44 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TEA_value = findViewById(R.id.TEA_Value);
         TDEE_value = findViewById(R.id.TDEE_Value);
         MaxCal = findViewById(R.id.cal_value);
-        parsedatabase(this);
-        data = new nutrition(height,weight,sex_kind,age,activity_kind);
-        BMR_value.setText(String.valueOf(REAL_FORMATTER.format(data.getBMR())));
-        TEF_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEF())));
-        TEA_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEA())));
-        TDEE_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTDEE())));
-        MaxCal.setText(String.valueOf(REAL_FORMATTER.format(data.Max_Cal(style))));
+        Integer check = parsedatabase(this);
+        if(check == 1){
+            data = new nutrition(height,weight,sex_kind,age,activity_kind);
+            BMR_value.setText(String.valueOf(REAL_FORMATTER.format(data.getBMR())));
+            TEF_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEF())));
+            TEA_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEA())));
+            TDEE_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTDEE())));
+            MaxCal.setText(String.valueOf(REAL_FORMATTER.format(data.Max_Cal(style))));
+        }
+        else{
+            BMR_value.setText(String.valueOf(0));
+            TEF_value.setText(String.valueOf(0));
+            TEA_value.setText(String.valueOf(0));
+            TDEE_value.setText(String.valueOf(0));
+            MaxCal.setText(String.valueOf(0));
+
+        }
         button_refesh = findViewById(R.id.go_refresh);
-
-
         button_refesh.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                parsedatabase(v.getContext());
-                BMR_value.setText(String.valueOf(REAL_FORMATTER.format(data.getBMR())));
-                TEF_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEF())));
-                TEA_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEA())));
-                TDEE_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTDEE())));
-                MaxCal.setText(String.valueOf(REAL_FORMATTER.format(data.Max_Cal(style))));
+                Integer check = parsedatabase(v.getContext());
+                if(check == 1){
+                    data = new nutrition(height,weight,sex_kind,age,activity_kind);
+                    BMR_value.setText(String.valueOf(REAL_FORMATTER.format(data.getBMR())));
+                    TEF_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEF())));
+                    TEA_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTEA())));
+                    TDEE_value.setText(String.valueOf(REAL_FORMATTER.format(data.getTDEE())));
+                    MaxCal.setText(String.valueOf(REAL_FORMATTER.format(data.Max_Cal(style))));
+                }
+                else{
+                    BMR_value.setText(String.valueOf(0));
+                    TEF_value.setText(String.valueOf(0));
+                    TEA_value.setText(String.valueOf(0));
+                    TDEE_value.setText(String.valueOf(0));
+                    MaxCal.setText(String.valueOf(0));
+
+                }
                 v.invalidate();
             }
         });
@@ -112,19 +131,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         return super.onOptionsItemSelected(item);
     }
-    private void parsedatabase(Context context){
+    private Integer parsedatabase(Context context){
         String data_config;
-
+        Integer result = 0;
         try {
             data_config = readFile(context);
             if (data_config == ""){
                 Toast.makeText(this,"No data config please config data",Toast.LENGTH_SHORT).show();
-                return;
+                return 0;
             }
             JSONObject json = new JSONObject(data_config);
             Object obj_weight =  json.get("weight");
             if (obj_weight == null) {
                 Toast.makeText(this,"No data for weight please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 weight = Double.parseDouble(obj_weight.toString());
@@ -132,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Object obj_height =  json.get("height");
             if (obj_height == null) {
                 Toast.makeText(this,"No data for height please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 height = Double.parseDouble(obj_weight.toString());
@@ -139,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Object obj_age = json.get("age");
             if (obj_age == null) {
                 Toast.makeText(this,"No data for age please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 age = Integer.parseInt(obj_age.toString());
@@ -146,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Object obj_sex = json.get("sex");
             if (obj_sex == null) {
                 Toast.makeText(this,"No data for sex please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 sex_kind = Integer.parseInt(obj_sex.toString());
@@ -153,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Object obj_activity =  json.get("activity");
             if (obj_activity == null) {
                 Toast.makeText(this,"No data for activity please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 activity_kind = Integer.parseInt(obj_activity.toString());
@@ -160,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Object obj_w_unit =  json.get("weight_unit");
             if (obj_w_unit == null) {
                 Toast.makeText(this,"No data for weight unit please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 weight_unit = Integer.parseInt(obj_w_unit.toString());
@@ -167,15 +192,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Object obj_h_unit =  json.get("height_unit");
             if (obj_h_unit == null) {
                 Toast.makeText(this,"No data for height unit please config data",Toast.LENGTH_SHORT).show();
+                return 0;
             }
             else{
                 height_unit = Integer.parseInt(obj_h_unit.toString());
             }
-
             Log.d("JSON" , json.toString());
+            return 1;
+
         }
         catch (JSONException e) {
             e.printStackTrace();
+            return 0;
         }
     }
     @Override
